@@ -190,3 +190,10 @@ def reid_edges(edges,name_to_door):
         e["pt2"]["id"] = name_to_door[e["pt2"]["name"]]
     
     return edges
+
+def route_dist(route):
+    dist=0
+    for e in route["route"]:
+        t_dist=distPoints(*e["pt1"]["loc"],*e["pt2"]["loc"])
+        dist += t_dist
+    return dist
