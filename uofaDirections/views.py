@@ -4,6 +4,7 @@ from .edgeCalculator import *
 from django.templatetags.static import static
 import polyline
 
+
 def home(request):
     return render(request, 'index.html')
 def routeResponse(request):
@@ -43,6 +44,7 @@ def routeResponse(request):
         route["route"].pop()
     
     route["actual_dist"] =  route_dist(route)
+
 
     res=JsonResponse(route,json_dumps_params={'indent': 4})
 
