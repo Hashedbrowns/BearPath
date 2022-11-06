@@ -13,21 +13,22 @@ def routeResponse(request):
         iweight = 1
     iweight=float(iweight)
 
-    doors, N = generateJson("."+static("MapData-Buildings.csv"))
+    doors, N = generateJson("./static/MapData-Buildings.csv")
 
-    peds = getPedways("."+static("MapData-Pedways.csv"))
+    peds = getPedways("./static/MapData-Pedways.csv")
     ped_edges = addPeds(peds,doors,N,iweight)
 
     name_to_door = { d["name"]:d["id"] for reg in doors for d in doors[reg]}
     N = len(name_to_door)
 
     int_edges = interalDist(doors,iweight)
-    with open("."+static("ex_edges.json"),"r+") as rf:
+    with open("./static/ex_edges.json","r+") as rf:
         ext_edges=json.load(rf)
-    
+
+    for i in range(len(ext_edges)):
+        ext_edges[i]["weight"] = ext_edges[i]["dist"]
 
     all_edges = reid_edges(int_edges,name_to_door) + ext_edges + ped_edges
-
 
     route = search(all_edges, doors[start][0]["id"], doors[end][0]["id"], N)
     route["polyline"] =  polyline.encode([ p for x in route["route"] for p in polyline.decode(x["polyline"])])
