@@ -4,7 +4,6 @@ from .edgeCalculator import *
 from django.templatetags.static import static
 import polyline
 
-
 def home(request):
     return render(request, 'index.html')
 def routeResponse(request):
@@ -45,7 +44,10 @@ def routeResponse(request):
     
     route["actual_dist"] =  route_dist(route)
 
-
     res=JsonResponse(route,json_dumps_params={'indent': 4})
+    res["Access-Control-Allow-Origin"] = "*"
+    res["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+    res["Access-Control-Max-Age"] = "1000"
+    res["Access-Control-Allow-Headers"] = "X-Requested-With, Content-Type"
 
     return res
