@@ -27,6 +27,7 @@ def routeResponse(request):
 
     all_edges = reid_edges(int_edges,name_to_door) + ext_edges + ped_edges
 
-
     route = search(all_edges, doors[start][0]["id"], doors[end][0]["id"], N)
+    route["polyline"] = "".join([x["polyline"] for x in route["route"]])
+
     return JsonResponse(route,json_dumps_params={'indent': 4})
