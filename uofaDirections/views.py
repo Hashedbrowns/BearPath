@@ -45,5 +45,8 @@ def routeResponse(request):
 
     res=JsonResponse(route,json_dumps_params={'indent': 4})
     res["Access-Control-Allow-Origin"] = "*"
+    res["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+    res["Access-Control-Max-Age"] = "1000"
+    res["Access-Control-Allow-Headers"] = "X-Requested-With, Content-Type"
 
     return res
