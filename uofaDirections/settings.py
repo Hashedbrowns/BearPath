@@ -53,10 +53,9 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOWED_ORIGINS =[
-    "http://localhost:55231",
-    "https://hashedbrowns.github.io/BearPathFrontend/"
-]
+CORS_ALLOWED_ORIGIN_REGEXES = [r'^.*$', ]
+CORS_ALLOWED_WHITELIST = '*'
+CORS_ALLOW_HEADERS = '*'
 
 CORS_ALLOW_METHODS = [
 'DELETE',
