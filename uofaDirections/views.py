@@ -36,10 +36,10 @@ def routeResponse(request):
     route["actual_dist"] =  route_dist(route)
 
 
-    if route["route"][0]["pt1"]["name"].split("-")[0] == route["route"][0]["pt1"]["name"].split("-")[0]:
+    if route["route"][0]["pt1"]["name"].split("-")[0] == route["route"][0]["pt2"]["name"].split("-")[0]:
         route["route"].pop(0)
     
-    if route["route"][-1]["pt1"]["name"].split("-")[0] == route["route"][-1]["pt1"]["name"].split("-")[0]:
+    if route["route"][-1]["pt1"]["name"].split("-")[0] == route["route"][-1]["pt2"]["name"].split("-")[0]:
         route["route"].pop()
 
     return JsonResponse(route,json_dumps_params={'indent': 4})
