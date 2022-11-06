@@ -129,6 +129,7 @@ def getEdge(edges,p1,p2):
         if e["pt1"]["id"] == p1 and e["pt2"]["id"] == p2:
             return e
         if e["pt1"]["id"] == p2 and e["pt2"]["id"] == p1:
+            e["polyline"] = polyline.encode(list(reversed(polyline.decode(e["polyline"]))))
             temp=e["pt1"]
             e["pt1"]= e["pt2"]
             e["pt2"]=temp
