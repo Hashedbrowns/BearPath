@@ -117,9 +117,6 @@ def externalDist(sheets):
                         edge["dist"] = distPoints(pt1["loc"][0],pt1["loc"][1],pt2["loc"][0],pt2["loc"][1])
                         edge["polyline"] = polyline.encode([pt1["loc"],pt2["loc"]])
                         edges.append(edge)
-
-    with open("ex_edges.json","w+") as wf:
-        json.dump(edges,wf,indent=4)
     
     return edges
 
