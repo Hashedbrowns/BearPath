@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .edgeCalculator import *
 from django.templatetags.static import static
 import polyline
+
 def home(request):
     return render(request, 'index.html')
 def routeResponse(request):
