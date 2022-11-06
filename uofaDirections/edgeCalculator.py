@@ -69,24 +69,21 @@ def addPeds(peds,doors,N,weight=0.3):
             s_edge={"pt1":s_bldg,"pt2":d}
 
             s_edge["dist"] = distPoints(s["lat"],s["lon"],*d["loc"])
-            s_edge["weight"] = s_edge["dist"] *weight
             s_edge["polyline"] =  polyline.encode([[s["lat"],s["lon"]],d["loc"]])
             ped_edges.append(s_edge)
 
         for d in doors[e['bldg']]:
             e_edge={"pt1":e_bldg,"pt2":d}
 
-            e_edge["dist"] = distPoints(e["lat"],e["lon"],*d["loc"])
-            e_edge["weight"] = e_edge["dist"]*weight
+            e_edge["dist"] = distPoints(e["lat"],e["lon"],*d["loc"])*weight
             e_edge["polyline"] =  polyline.encode([[e["lat"],e["lon"]],d["loc"]])
             ped_edges.append(e_edge)
 
 
         ped_edge={"pt1":s_bldg,"pt2":e_bldg}
-        ped_edge["dist"] = distPoints(s["lat"],s["lon"],e["lat"],e["lon"])
-        ped_edge["weight"] = ped_edge["dist"]*weight
+        ped_edge["dist"] = distPoints(s["lat"],s["lon"],e["lat"],e["lon"])*weight
         ped_edge["polyline"] =  polyline.encode([[s["lat"],s["lon"]],[e["lat"],e["lon"]]])     
-        ped_edges.append(e_edge)
+        ped_edges.append(ped_edge)
 
 
         doors[s['bldg']].append(s_bldg)
@@ -102,8 +99,7 @@ def interalDist(sheets,weight=0.3):
                 if pt1["id"] != pt2["id"] and (pt2["id"],pt1["id"]) not in visted:
                     visted.add((pt1["id"],pt2["id"],))
                     edge = {"pt1":pt1,"pt2":pt2}
-                    edge["dist"] = distPoints(pt1["loc"][0],pt1["loc"][1],pt2["loc"][0],pt2["loc"][1])
-                    edge["weight"] = edge["dist"]*weight
+                    edge["dist"] = distPoints(pt1["loc"][0],pt1["loc"][1],pt2["loc"][0],pt2["loc"][1])*weight
                     edge["polyline"] = polyline.encode([pt1["loc"],pt2["loc"]])
                     int_edges.append(edge)
     
@@ -122,6 +118,9 @@ def externalDist(sheets):
                         edge["dist"] = distPoints(pt1["loc"][0],pt1["loc"][1],pt2["loc"][0],pt2["loc"][1])
                         edge["polyline"] = polyline.encode([pt1["loc"],pt2["loc"]])
                         edges.append(edge)
+
+    with open("ex_edges.json","w+") as wf:
+        json.dump(edges,wf,indent=4)
     
     return edges
 
@@ -142,16 +141,16 @@ def search(edges, start, end, N):
 
     adj=[ [] for _ in range(N)]
     for e in edges:
-        adj[e["pt1"]["id"]].append((e["weight"], e["pt2"]["id"]))
-        adj[e["pt2"]["id"]].append((e["weight"], e["pt1"]["id"]))
+        adj[e["pt1"]["id"]].append((e["dist"], e["pt2"]["id"]))
+        adj[e["pt2"]["id"]].append((e["dist"], e["pt1"]["id"]))
 
 
-    weight = [INF for _ in range(N)]
+    dist = [INF for _ in range(N)]
     prev = [None for _ in range(N)]
 
 
 
-    weight[start] = 0
+    dist[start] = 0
     pq = []
     visited = set()
 
@@ -165,10 +164,10 @@ def search(edges, start, end, N):
         for d,v in adj[u]:
             if v in visited: continue
             
-            if weight[v] > weight[u] + d:
-                weight[v] = weight[u] + d
+            if dist[v] > dist[u] + d:
+                dist[v] = dist[u] + d
                 prev[v] = u
-                heappush(pq,(weight[v],v))
+                heappush(pq,(dist[v],v))
                 
     route=[]
     cur=end
@@ -178,13 +177,10 @@ def search(edges, start, end, N):
     
     route.reverse()
     r_route = []
-    dist = 0
     for i in range(len(route)-1):
-        e = getEdge(edges,route[i],route[i+1])
-        r_route.append(e)
-        dist += e["dist"]
+        r_route.append(getEdge(edges,route[i],route[i+1]))
          
-    return {"total_weight":weight[end],"total_dist":dist,"route":r_route}
+    return {"total_dist":dist[end],"route":r_route}
 
 def reid_edges(edges,name_to_door):
     for e in edges:
@@ -192,4 +188,3 @@ def reid_edges(edges,name_to_door):
         e["pt2"]["id"] = name_to_door[e["pt2"]["name"]]
     
     return edges
-
