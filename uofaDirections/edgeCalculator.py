@@ -180,7 +180,8 @@ def search(edges, start, end, N):
     r_route = []
     for i in range(len(route)-1):
         r_route.append(getEdge(edges,route[i],route[i+1]))
-         
+    
+
     return {"total_dist":dist[end],"route":r_route}
 
 def reid_edges(edges,name_to_door):

@@ -34,4 +34,10 @@ def routeResponse(request):
     route = search(all_edges, doors[start][0]["id"], doors[end][0]["id"], N)
     route["polyline"] =  polyline.encode([ p for x in route["route"] for p in polyline.decode(x["polyline"])])
 
+    if route["route"][0]["pt1"]["name"].split("-")[0] == route["route"][0]["pt1"]["name"].split("-")[0]:
+        route["route"].pop(0)
+    
+    if route["route"][-1]["pt1"]["name"].split("-")[0] == route["route"][-1]["pt1"]["name"].split("-")[0]:
+        route["route"].pop()
+
     return JsonResponse(route,json_dumps_params={'indent': 4})
