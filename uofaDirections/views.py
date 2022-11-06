@@ -43,5 +43,7 @@ def routeResponse(request):
     
     route["actual_dist"] =  route_dist(route)
 
+    res=JsonResponse(route,json_dumps_params={'indent': 4})
+    res["Access-Control-Allow-Origin"] = "*"
 
-    return JsonResponse(route,json_dumps_params={'indent': 4})
+    return res
