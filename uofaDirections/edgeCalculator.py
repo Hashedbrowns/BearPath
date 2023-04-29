@@ -13,7 +13,7 @@ def generateJson(filename):
             doors[loc] = []
         doors[loc].append({"id":i,"name":loc+"-"+sheets["Door Name"][i],"loc":((sheets["Latitude"][i],sheets["Longitude"][i]))})
 
-    with open("doors.json","w+") as wf:
+    with open("./static/data/doors.json","w+") as wf:
         json.dump(doors,wf,indent=4)
     
     return doors, len(sheets)
@@ -26,7 +26,7 @@ def getPedways(filename):
         end={"bldg":peds["End"][i],"lat":peds["ELatitude"][i],"lon":peds["ELongitude"][i]}
         fpeds.append([start,end])
     
-    with open("peds.json","w+") as wf:
+    with open("./static/data/peds.json","w+") as wf:
         json.dump(fpeds,wf,indent=4)
     return fpeds
 
@@ -119,7 +119,7 @@ def externalDist(sheets):
                         edge["polyline"] = polyline.encode([pt1["loc"],pt2["loc"]])
                         edges.append(edge)
 
-    with open("ex_edges.json","w+") as wf:
+    with open("./static/data/ex_edges.json","w+") as wf:
         json.dump(edges,wf,indent=4)
     
     return edges
