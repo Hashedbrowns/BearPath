@@ -184,8 +184,7 @@
       </select>
       <button class="btn btn-outline-success w-100 btn-lg mt-2" style="padding: 10px;" type="submit">Search</button>
     </form>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUtl5270Zd73fBYTG5aoPNknA9rs3SRfs&callback=initMap&libraries=geometry"></script>
+      <input id="GOOGLE_MAPS_API_KEY" value="{{ GOOGLE_MAPS_API_KEY }}" type="hidden" />
     <script src = "{% static '\js\map.js' %}"></script>
   </div>
 </body>

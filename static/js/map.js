@@ -1,5 +1,14 @@
 let map;
 let polyline;
+let GOOGLE_MAPS_API_KEY = document.getElementById('GOOGLE_MAPS_API_KEY').value
+    function loadGoogleMapsAPI() {
+      let script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.async = true;
+      script.defer = true;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&callback=initMap&libraries=geometry`;
+      document.body.appendChild(script);
+    }
     function initMap() {
       map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 53.52656767335504, lng: -113.5255622404301 },
@@ -94,7 +103,7 @@ let polyline;
                  map: map
       });
     }
-
+    loadGoogleMapsAPI()
     window.initMap = initMap;
     form = document.getElementById('superMegaSearchForm')
       start = document.getElementById('from')

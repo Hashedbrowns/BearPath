@@ -3,8 +3,9 @@ from django.shortcuts import render, redirect
 from .edgeCalculator import *
 from django.templatetags.static import static
 import polyline
+import os
 def home(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html', context={"GOOGLE_MAPS_API_KEY": os.environ.get("GOOGLE_MAPS_API_KEY")})
 
 
 def routeResponse(request):
