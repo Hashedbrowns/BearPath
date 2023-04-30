@@ -2,18 +2,18 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>BearPath</title>
-  {% load static %}
-  <link rel="icon" type="image/x-icon" href="icon.png">
-  <link rel='stylesheet' href="{% static '\css\bootstrap.min.css' %}" >
-  <script src="{% static '\js\bootstrap.min.js' %}"></script>
-  <link rel="stylesheet" href="{% static '\css\main.css' %}">
-  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <meta charset="UTF-8">
+    <title>BearPath</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel='stylesheet' href="{% static '\css\bootstrap.min.css' %}" >
+    <script src="{% static '\js\bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static '\css\main.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 </head>
 
 <body>
-  <nav id="navbar" class="navbar navbar-expand-md navbar-dark bg-dark" style="padding: 10px">
+    <nav id="navbar" class="navbar navbar-expand-md navbar-dark bg-dark" style="padding: 10px">
     <a class="navbar-brand" href="#">BearPath</a>
     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse"
       aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,91 +101,91 @@
           type="submit">Search</button>
       </form>
     </div>
-  </nav>
-  </nav>
-  <div id="map"></div>
+    </nav>
+    </nav>
+    <div id="map"></div>
 
-  </div>
-  <div id="footer" class="p-4 footer-dark bg-dark">
-    <form class="form-inline mt-2 mt-md-0" id="superMegaSearchForm2">
-      <select class="form-select-lg w-100" id="from2">
-        <option value='ADM'>Administration (ADM)</option>
-        <option value='AF'>Agriculture Forestry Centre (AF)</option>
-        <option value='ASH'>Assiniboia Hall (ASH)</option>
-        <option value='ATH'>Athabasca Hall (ATH)</option>
-        <option value='C'>Gunning/Lemieux Chemistry Centre (C)</option>
-        <option value='CAB'>Central Academic Building (CAB)</option>
-        <option value='CCIS'>Centennial Centre for Interdisciplinary Science (CCIS)</option>
-        <option value='CL'>Cameron Library (CL)</option>
-        <option value='CME'>Chemical/Materials Engineering Building (CME)</option>
-        <option value='CSC'>Computing Science Centre (CSC)</option>
-        <option value='DICE'>Donadeo Innovation Centre for Engineering (DICE)</option>
-        <option value='ED_N'>Education Centre North (ED-N)</option>
-        <option value='ED_S'>Education Centre South (ED-S)</option>
-        <option value='ESB'>Earth Sciences Building (ESB)</option>
-        <option value='ETLC'>Engineering Teaching and Learning Complex (ETLC)</option>
-        <option value='FAB'>Fine Arts Building (FAB)</option>
-        <option value='HC'>Humanities Centre (HC)</option>
-        <option value='HEB'>Human Ecology (HEB)</option>
-        <option value='HUB'>HUB International (HUB)</option>
-        <option value='IND'>Industrial Design Studio (IND)</option>
-        <option value='LC'>Law Centre (LC)</option>
-        <option value='MEC'>Mechanical Engineering (MEC)</option>
-        <option value='NPP'>North Power Plant / Dewey's (NPP)</option>
-        <option value='NRE'>Natural Resources Engineering (NRE)</option>
-        <option value='PAV'>Butterdome (PAV)</option>
-        <option value='PB'>Pembina Hall (PB)</option>
-        <option value='RL'>Rutherford Library (RL)</option>
-        <option value='SAB'>South Academic Building (SAB)</option>
-        <option value='SJ'>St. Joseph's College (SJ)</option>
-        <option value='SS'>St. Stephen's College (SS)</option>
-        <option value='SUB'>Students' Union Building (SUB)</option>
-        <option value='TC'>Timms Centre for the Arts (TC)</option>
-        <option value='TEL'>TELUS Centre (TEL)</option>
-        <option value='TL'>Tory Building (TL)</option>
-        <option value='VVC'>Van Vliet Complex (VVC)</option>
-      </select>
-      <select class="form-select-lg mt-2 w-100" id="to2">
-        <option value='ADM'>Administration (ADM)</option>
-        <option value='AF'>Agriculture Forestry Centre (AF)</option>
-        <option value='ASH'>Assiniboia Hall (ASH)</option>
-        <option value='ATH'>Athabasca Hall (ATH)</option>
-        <option value='C'>Gunning/Lemieux Chemistry Centre (C)</option>
-        <option value='CAB'>Central Academic Building (CAB)</option>
-        <option value='CCIS'>Centennial Centre for Interdisciplinary Science (CCIS)</option>
-        <option value='CL'>Cameron Library (CL)</option>
-        <option value='CME'>Chemical/Materials Engineering Building (CME)</option>
-        <option value='CSC'>Computing Science Centre (CSC)</option>
-        <option value='DICE'>Donadeo Innovation Centre for Engineering (DICE)</option>
-        <option value='ED_N'>Education Centre North (ED-N)</option>
-        <option value='ED_S'>Education Centre South (ED-S)</option>
-        <option value='ESB'>Earth Sciences Building (ESB)</option>
-        <option value='ETLC'>Engineering Teaching and Learning Complex (ETLC)</option>
-        <option value='FAB'>Fine Arts Building (FAB)</option>
-        <option value='HC'>Humanities Centre (HC)</option>
-        <option value='HEB'>Human Ecology (HEB)</option>
-        <option value='HUB'>HUB International (HUB)</option>
-        <option value='IND'>Industrial Design Studio (IND)</option>
-        <option value='LC'>Law Centre (LC)</option>
-        <option value='MEC'>Mechanical Engineering (MEC)</option>
-        <option value='NPP'>North Power Plant / Dewey's (NPP)</option>
-        <option value='NRE'>Natural Resources Engineering (NRE)</option>
-        <option value='PAV'>Butterdome (PAV)</option>
-        <option value='PB'>Pembina Hall (PB)</option>
-        <option value='RL'>Rutherford Library (RL)</option>
-        <option value='SAB'>South Academic Building (SAB)</option>
-        <option value='SJ'>St. Joseph's College (SJ)</option>
-        <option value='SS'>St. Stephen's College (SS)</option>
-        <option value='SUB'>Students' Union Building (SUB)</option>
-        <option value='TC'>Timms Centre for the Arts (TC)</option>
-        <option value='TEL'>TELUS Centre (TEL)</option>
-        <option value='TL'>Tory Building (TL)</option>
-        <option value='VVC'>Van Vliet Complex (VVC)</option>
-      </select>
-      <button class="btn btn-outline-success w-100 btn-lg mt-2" style="padding: 10px;" type="submit">Search</button>
-    </form>
-      <input id="GOOGLE_MAPS_API_KEY" value="{{ GOOGLE_MAPS_API_KEY }}" type="hidden" />
-    <script src = "{% static '\js\map.js' %}"></script>
-  </div>
+    </div>
+    <div id="footer" class="p-4 footer-dark bg-dark">
+        <form class="form-inline mt-2 mt-md-0" id="superMegaSearchForm2">
+          <select class="form-select-lg w-100" id="from2">
+            <option value='ADM'>Administration (ADM)</option>
+            <option value='AF'>Agriculture Forestry Centre (AF)</option>
+            <option value='ASH'>Assiniboia Hall (ASH)</option>
+            <option value='ATH'>Athabasca Hall (ATH)</option>
+            <option value='C'>Gunning/Lemieux Chemistry Centre (C)</option>
+            <option value='CAB'>Central Academic Building (CAB)</option>
+            <option value='CCIS'>Centennial Centre for Interdisciplinary Science (CCIS)</option>
+            <option value='CL'>Cameron Library (CL)</option>
+            <option value='CME'>Chemical/Materials Engineering Building (CME)</option>
+            <option value='CSC'>Computing Science Centre (CSC)</option>
+            <option value='DICE'>Donadeo Innovation Centre for Engineering (DICE)</option>
+            <option value='ED_N'>Education Centre North (ED-N)</option>
+            <option value='ED_S'>Education Centre South (ED-S)</option>
+            <option value='ESB'>Earth Sciences Building (ESB)</option>
+            <option value='ETLC'>Engineering Teaching and Learning Complex (ETLC)</option>
+            <option value='FAB'>Fine Arts Building (FAB)</option>
+            <option value='HC'>Humanities Centre (HC)</option>
+            <option value='HEB'>Human Ecology (HEB)</option>
+            <option value='HUB'>HUB International (HUB)</option>
+            <option value='IND'>Industrial Design Studio (IND)</option>
+            <option value='LC'>Law Centre (LC)</option>
+            <option value='MEC'>Mechanical Engineering (MEC)</option>
+            <option value='NPP'>North Power Plant / Dewey's (NPP)</option>
+            <option value='NRE'>Natural Resources Engineering (NRE)</option>
+            <option value='PAV'>Butterdome (PAV)</option>
+            <option value='PB'>Pembina Hall (PB)</option>
+            <option value='RL'>Rutherford Library (RL)</option>
+            <option value='SAB'>South Academic Building (SAB)</option>
+            <option value='SJ'>St. Joseph's College (SJ)</option>
+            <option value='SS'>St. Stephen's College (SS)</option>
+            <option value='SUB'>Students' Union Building (SUB)</option>
+            <option value='TC'>Timms Centre for the Arts (TC)</option>
+            <option value='TEL'>TELUS Centre (TEL)</option>
+            <option value='TL'>Tory Building (TL)</option>
+            <option value='VVC'>Van Vliet Complex (VVC)</option>
+          </select>
+          <select class="form-select-lg mt-2 w-100" id="to2">
+            <option value='ADM'>Administration (ADM)</option>
+            <option value='AF'>Agriculture Forestry Centre (AF)</option>
+            <option value='ASH'>Assiniboia Hall (ASH)</option>
+            <option value='ATH'>Athabasca Hall (ATH)</option>
+            <option value='C'>Gunning/Lemieux Chemistry Centre (C)</option>
+            <option value='CAB'>Central Academic Building (CAB)</option>
+            <option value='CCIS'>Centennial Centre for Interdisciplinary Science (CCIS)</option>
+            <option value='CL'>Cameron Library (CL)</option>
+            <option value='CME'>Chemical/Materials Engineering Building (CME)</option>
+            <option value='CSC'>Computing Science Centre (CSC)</option>
+            <option value='DICE'>Donadeo Innovation Centre for Engineering (DICE)</option>
+            <option value='ED_N'>Education Centre North (ED-N)</option>
+            <option value='ED_S'>Education Centre South (ED-S)</option>
+            <option value='ESB'>Earth Sciences Building (ESB)</option>
+            <option value='ETLC'>Engineering Teaching and Learning Complex (ETLC)</option>
+            <option value='FAB'>Fine Arts Building (FAB)</option>
+            <option value='HC'>Humanities Centre (HC)</option>
+            <option value='HEB'>Human Ecology (HEB)</option>
+            <option value='HUB'>HUB International (HUB)</option>
+            <option value='IND'>Industrial Design Studio (IND)</option>
+            <option value='LC'>Law Centre (LC)</option>
+            <option value='MEC'>Mechanical Engineering (MEC)</option>
+            <option value='NPP'>North Power Plant / Dewey's (NPP)</option>
+            <option value='NRE'>Natural Resources Engineering (NRE)</option>
+            <option value='PAV'>Butterdome (PAV)</option>
+            <option value='PB'>Pembina Hall (PB)</option>
+            <option value='RL'>Rutherford Library (RL)</option>
+            <option value='SAB'>South Academic Building (SAB)</option>
+            <option value='SJ'>St. Joseph's College (SJ)</option>
+            <option value='SS'>St. Stephen's College (SS)</option>
+            <option value='SUB'>Students' Union Building (SUB)</option>
+            <option value='TC'>Timms Centre for the Arts (TC)</option>
+            <option value='TEL'>TELUS Centre (TEL)</option>
+            <option value='TL'>Tory Building (TL)</option>
+            <option value='VVC'>Van Vliet Complex (VVC)</option>
+          </select>
+          <button class="btn btn-outline-success w-100 btn-lg mt-2" style="padding: 10px;" type="submit">Search</button>
+        </form>
+        <input id="GOOGLE_MAPS_API_KEY" value="{{ GOOGLE_MAPS_API_KEY }}" type="hidden" />
+        <script src = "{% static '\js\map.js' %}"></script>
+    </div>
 </body>
 </html>

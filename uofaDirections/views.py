@@ -1,11 +1,13 @@
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.shortcuts import render
 from .edgeCalculator import *
-from django.templatetags.static import static
 import polyline
 from dotenv import load_dotenv
 import os
+
 load_dotenv()
+
+
 def home(request):
     return render(request, 'index.html', context={"GOOGLE_MAPS_API_KEY": os.environ.get("GOOGLE_MAPS_API_KEY")})
 
@@ -14,16 +16,16 @@ def routeResponse(request):
     start = request.GET.get('start')
     end = request.GET.get("end")
     iweight = request.GET.get("iweight")
-    if iweight == None:
+    if iweight is None:
         iweight = 1
     iweight = float(iweight)
 
-    doors, N = generateJson("./static/data/MapData-Buildings.csv")
+    doors, n = generateJson("./static/data/MapData-Buildings.csv")
     peds = getPedways('./static/data/MapData-Pedways.csv')
-    ped_edges = addPeds(peds, doors, N, iweight)
+    ped_edges = addPeds(peds, doors, n, iweight)
 
     name_to_door = {d["name"]: d["id"] for reg in doors for d in doors[reg]}
-    N = len(name_to_door)
+    n = len(name_to_door)
 
     int_edges = interalDist(doors, iweight)
     with open("./static/data/ex_edges.json", "r+") as rf:
@@ -33,7 +35,7 @@ def routeResponse(request):
     with open("./static/data/all_edges.json", "w+") as wf:
         json.dump(all_edges, wf, indent=4)
 
-    route = search(all_edges, doors[start][0]["id"], doors[end][0]["id"], N)
+    route = search(all_edges, doors[start][0]["id"], doors[end][0]["id"], n)
     route["polyline"] = polyline.encode([p for x in route["route"] for p in polyline.decode(x["polyline"])])
 
     if route["route"][0]["pt1"]["name"].split("-")[0] == route["route"][0]["pt2"]["name"].split("-")[0]:
