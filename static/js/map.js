@@ -3,6 +3,7 @@ let polyline;
 let GOOGLE_MAPS_API_KEY = document.getElementById('GOOGLE_MAPS_API_KEY').value
 let navbar = document.getElementById('navbar')
 let mapContainer = document.getElementById('map-container')
+let navbarToggler = document.getElementById('navbar-toggler')
 function loadGoogleMapsAPI() {
     let script = document.createElement('script');
     script.type = 'text/javascript';
@@ -108,7 +109,11 @@ function adjustMapHeight() {
     navbarHeight = navbar.offsetHeight
     mapContainer.style.height = `calc(100% - (${navbarHeight}px))`;
 }
+
 window.addEventListener('resize', adjustMapHeight, false)
+const resize_ob = new ResizeObserver(adjustMapHeight)
+resize_ob.observe(navbar)
+
 loadGoogleMapsAPI()
 window.initMap = initMap;
 form = document.getElementById('superMegaSearchForm')
