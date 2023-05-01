@@ -7,48 +7,31 @@ body {
   font-family: "Avenir Next";
 }
 
+/* Styles for the map container */
+#map-container {
+  width: 100%;
+  box-sizing: border-box; /* include padding and border in the height calculation */
+}
+
+/* Styles for the map */
 #map {
-  /* The height is 400 pixels */
-  height: calc(100% - 90px);
-  /* The width is the width of the web page */
+  height: 100%;
   width: 100%;
-  display: block;
 }
 
-.box {
-  color: #fff;
-  padding: 10px;
-  font-size: 20px;
+#superMegaSearchForm {
+  display: flex;
 }
 
-@media (max-device-width: 450px) {
-  #navbar {
-    display: none;
-  }
 
-  #map {
-    height: 100%;
-  }
+#navbarSupportedContent {
+  justify-content: right;
 }
 
-/* Style page content */
-.main {
-  /* Same as the width of the sidebar */
-  margin-left: 160px;
-  padding: 0px 10px;
+#from {
+  margin-right: 10px;
 }
 
-#footer {
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
-  z-index: 1000;
+#to {
+  margin-right: 10px;
 }
-
-@media (min-device-width: 450px) {
-  #footer {
-    display: none;
-  }
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
