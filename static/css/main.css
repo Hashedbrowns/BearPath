@@ -23,7 +23,15 @@ body {
   display: flex;
 }
 
-#submit-button {
-  padding: 10px;
-  margin: 10px;
+
+#navbarCollapse {
+  justify-content: right;
+}
+
+#from {
+  margin-right: 10px;
+}
+
+#to {
+  margin-right: 10px;
 }
