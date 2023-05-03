@@ -1,9 +1,3 @@
-let map;
-let polyline;
-let GOOGLE_MAPS_API_KEY = document.getElementById('GOOGLE_MAPS_API_KEY').value
-let navbar = document.getElementById('navbar')
-let mapContainer = document.getElementById('map-container')
-let navbarToggler = document.getElementById('navbar-toggler')
 function loadGoogleMapsAPI() {
     let script = document.createElement('script');
     script.type = 'text/javascript';
@@ -106,31 +100,45 @@ function initMap() {
     adjustMapHeight()
 }
 function adjustMapHeight() {
-    navbarHeight = navbar.offsetHeight
-    mapContainer.style.height = `calc(100% - (${navbarHeight}px))`;
+    mapContainer.style.height = `calc(100% - (${navbar.offsetHeight}px))`;
 }
+
+let polyline;
+GOOGLE_MAPS_API_KEY = document.getElementById('GOOGLE_MAPS_API_KEY').value
+navbar = document.getElementById('navbar')
+mapContainer = document.getElementById('map-container')
+form = document.getElementById('search-form')
+start = document.getElementById('from')
+end = document.getElementById('to')
+myModal = new bootstrap.Modal(document.getElementById('duplicateLocationModal'))
+loadGoogleMapsAPI()
+window.initMap = initMap;
 
 window.addEventListener('resize', adjustMapHeight, false)
 const resize_ob = new ResizeObserver(adjustMapHeight)
 resize_ob.observe(navbar)
-
-loadGoogleMapsAPI()
-window.initMap = initMap;
-form = document.getElementById('search-form')
-start = document.getElementById('from')
-end = document.getElementById('to')
 
 // Handle the click and submit event and disable the browsers default action
 // Make calls to our backend and then handle the response.
 const formSubmitHandler = (event) => {
     event.preventDefault()
     api_endpoint = window.location.origin
-    fetch(`${api_endpoint}/api/?start=${start.value}&end=${end.value}`)
+    if (start.value === end.value) {
+        myModal.toggle()
+        return
+    }
+    try {
+        fetch(`${api_endpoint}/api/?start=${start.value}&end=${end.value}`)
         .then((res ) => res.json())
         .then((res) => {
             polyline.setPath(google.maps.geometry.encoding.decodePath(res["polyline"]))
             console.log('from: ', start.value, 'to: ', end.value)
         })
+    }
+    catch (err) {
+        console.log(err)
+        myModal.toggle()
+    }
 }
 
 form.addEventListener('submit', formSubmitHandler, false)
