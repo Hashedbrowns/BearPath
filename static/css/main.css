@@ -4,7 +4,6 @@ body {
   margin: 0;
   height: 100%;
   width: 100%;
-  font-family: "Avenir Next";
 }
 
 /* Styles for the map container */
@@ -34,4 +33,8 @@ body {
 
 #to {
   margin-right: 10px;
+}
+
+.modal-header {
+  border-bottom: none;
 }
