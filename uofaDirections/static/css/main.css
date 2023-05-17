@@ -38,3 +38,7 @@ body {
 .modal-header {
   border-bottom: none;
 }
+
+#submit-button {
+  min-width: 80px;
+}

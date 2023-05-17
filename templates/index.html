@@ -97,7 +97,9 @@
                         <option value='VVC'>Van Vliet Complex (VVC)</option>
                     </select>
                     <button class="btn btn-outline-success mr-sm-2 mt-3 mb-3 ml-2 mr-2" id="submit-button"
-                    type="submit">Search</button>
+                    type="submit">
+                        Search
+                    </button>
                 </form>
             </div>
         </div>
@@ -106,19 +108,17 @@
         <div id="map"></div>
     </div>
    <!-- Button trigger modal -->
-<!-- Modal -->
-<div class="modal fade" id="duplicateLocationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cannot display route.</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+    <!-- Modal -->
+    <div class="modal fade" id="duplicateLocationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cannot display route.</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-
-
     <input id="GOOGLE_MAPS_API_KEY" value="{{ GOOGLE_MAPS_API_KEY }}" type="hidden" />
     <script src = "{% static '\js\map.js' %}"></script>
 </body>
