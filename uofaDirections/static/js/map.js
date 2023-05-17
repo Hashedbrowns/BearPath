@@ -110,6 +110,7 @@ mapContainer = document.getElementById('map-container')
 form = document.getElementById('search-form')
 start = document.getElementById('from')
 end = document.getElementById('to')
+submitButton = document.getElementById('submit-button')
 myModal = new bootstrap.Modal(document.getElementById('duplicateLocationModal'))
 loadGoogleMapsAPI()
 window.initMap = initMap;
@@ -121,24 +122,30 @@ resize_ob.observe(navbar)
 // Handle the click and submit event and disable the browsers default action
 // Make calls to our backend and then handle the response.
 const formSubmitHandler = (event) => {
+    submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" id="submit-spinner"></span> <span class="visually-hidden">Loading...</span>'
+    submitButton.className = 'btn btn-outline-warning mr-sm-2 mt-3 mb-3 ml-2 mr-2'
     event.preventDefault()
-    api_endpoint = window.location.origin
-    if (start.value === end.value) {
-        myModal.toggle()
-        return
-    }
-    try {
-        fetch(`${api_endpoint}/api/?start=${start.value}&end=${end.value}`)
-        .then((res ) => res.json())
-        .then((res) => {
-            polyline.setPath(google.maps.geometry.encoding.decodePath(res["polyline"]))
-            console.log('from: ', start.value, 'to: ', end.value)
-        })
-    }
-    catch (err) {
-        console.log(err)
-        myModal.toggle()
-    }
+    setTimeout(() => {
+            const api_endpoint = window.location.origin
+            if (start.value === end.value) {
+                myModal.toggle()
+            } else {
+                try {
+                    fetch(`${api_endpoint}/api/?start=${start.value}&end=${end.value}`)
+                    .then((res ) => res.json())
+                    .then((res) => {
+                        polyline.setPath(google.maps.geometry.encoding.decodePath(res["polyline"]))
+                        console.log('from: ', start.value, 'to: ', end.value)
+                    })
+                }
+                catch (err) {
+                    console.log(err)
+                    myModal.toggle()
+                }
+            }
+            submitButton.className = 'btn btn-outline-success mr-sm-2 mt-3 mb-3 ml-2 mr-2'
+            submitButton.innerHTML = 'Search'
+        }, 1000)
 }
 
 form.addEventListener('submit', formSubmitHandler, false)
